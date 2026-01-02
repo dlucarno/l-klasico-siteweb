@@ -1,9 +1,9 @@
 <template>
   <div class="relative min-h-screen overflow-x-hidden bg-gradient-primary text-white">
     <!-- Animated Background -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
       <div class="particle-system">
-        <div v-for="n in 15" :key="n" class="particle" :style="getParticleStyle(n)"></div>
+        <div v-for="(style, i) in particles" :key="i" class="particle" :style="style"></div>
       </div>
     </div>
 
@@ -199,6 +199,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
+
 const features = [
   { icon: '⚔️', title: 'Duels PvP', description: 'Affrontez des supporters adverses en temps réel.' },
   { icon: '🏆', title: 'Tournois', description: 'Grimpez les échelons et remportez des trophées exclusifs.' },
@@ -208,14 +210,24 @@ const features = [
   { icon: '⚡', title: 'Live Events', description: 'Participez aux événements pendant les vrais matchs.' },
 ]
 
-const getParticleStyle = (n: number) => {
-  return {
-    top: `${Math.random() * 100}%`,
-    left: `${Math.random() * 100}%`,
-    animationDelay: `${Math.random() * 5}s`,
-    opacity: Math.random() * 0.5 + 0.1
-  }
+const particles = ref<any[]>([])
+
+const generateParticles = () => {
+    const p = []
+    for(let i=0; i<15; i++) {
+        p.push({
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 5}s`,
+            opacity: Math.random() * 0.5 + 0.1
+        })
+    }
+    particles.value = p
 }
+
+onMounted(() => {
+    generateParticles()
+})
 </script>
 
 <style scoped>

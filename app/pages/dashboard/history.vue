@@ -1,11 +1,9 @@
 <template>
-  <div class="min-h-screen bg-gradient-primary pb-20">
-    <DashboardHeader />
-    
-    <div class="container py-16 mb-20 relative z-10">
+  <div>
+    <div class="container py-16 mb-20 fade-in-up">
       <DashboardNav />
       
-      <div class="card fade-in-up">
+      <div class="card">
         <div class="flex items-center gap-3 mb-8">
           <div class="w-1 h-10 bg-gradient-end rounded-full"></div>
           <h2 class="text-3xl font-bold text-white">Historique des transactions</h2>
@@ -62,7 +60,8 @@
 
 <script setup lang="ts">
 definePageMeta({
-  middleware: 'auth'
+  middleware: 'auth',
+  layout: 'dashboard'
 })
 
 const transactions = [

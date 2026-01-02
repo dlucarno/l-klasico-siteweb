@@ -1,8 +1,6 @@
 <template>
-  <div class="min-h-screen bg-gradient-primary pb-20">
-    <DashboardHeader />
-    
-    <div class="container py-16 mb-20 relative z-10">
+  <div>
+    <div class="container py-16 mb-20 fade-in-up">
       <DashboardNav />
       
       <div class="card fade-in-up">
@@ -50,7 +48,8 @@
 
 <script setup lang="ts">
 definePageMeta({
-  middleware: 'auth'
+  middleware: 'auth',
+  layout: 'dashboard'
 })
 
 const faqs = [

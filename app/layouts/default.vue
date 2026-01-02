@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div class="layout bg-bg-primary text-white">
     <AppHeader />
     <main>
       <slot />
@@ -16,6 +16,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding-top: 80px; /* Compense la hauteur du header fixe */
 }
 
 main {

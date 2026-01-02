@@ -1,71 +1,64 @@
 <template>
-  <div class="min-h-screen bg-gradient-primary text-white relative overflow-x-hidden">
-    <!-- Background Ambient -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-      <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-end/10 rounded-full blur-[100px] animate-pulse-slow"></div>
-      <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-barca-red/10 rounded-full blur-[100px] animate-pulse-slow" style="animation-delay: 2s;"></div>
-    </div>
-
-    <DashboardHeader />
-
-    <main class="container py-16 mb-20 relative z-10">
+  <div>
+    <!-- Content starts directly since layout handles header/bg -->
+    <div class="container py-8 md:py-16 mb-20">
       <!-- Welcome Section -->
-      <div class="mb-12 flex flex-col md:flex-row justify-between items-end gap-6 animate-fade-in-up">
+      <div class="mb-8 md:mb-12 flex flex-col md:flex-row justify-between items-end gap-6 animate-fade-in-up">
         <div>
-          <h1 class="text-4xl font-black mb-2">
+          <h1 class="text-3xl md:text-4xl font-black mb-2">
             Bonjour, <span class="text-transparent bg-clip-text bg-gradient-to-r from-gradient-end to-purple-400">{{ user?.email?.split('@')[0] || 'Fan' }}</span> 👋
           </h1>
-          <p class="text-white/50">Prêt à dominer le classement aujourd'hui ?</p>
+          <p class="text-white/50 text-sm md:text-base">Prêt à dominer le classement aujourd'hui ?</p>
         </div>
         
-        <div class="flex gap-3">
-           <button class="btn btn-glass px-6 py-3 rounded-xl flex items-center gap-2">
+        <div class="flex gap-3 w-full md:w-auto">
+           <button class="flex-1 md:flex-none btn btn-glass px-4 md:px-6 py-3 rounded-xl flex items-center justify-center gap-2">
              <span>🔔</span>
              <span class="hidden md:inline">Notifications</span>
            </button>
-           <button class="btn btn-primary px-6 py-3 rounded-xl shadow-lg shadow-gradient-end/20">
-             <span>⚔️ Jouer un Duel</span>
+           <button class="flex-1 md:flex-none btn btn-primary px-4 md:px-6 py-3 rounded-xl shadow-lg shadow-gradient-end/20 whitespace-nowrap">
+             <span>⚔️ Jouer</span>
            </button>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
         <!-- Main Content Column (8 cols) -->
-        <div class="lg:col-span-8 space-y-8">
+        <div class="lg:col-span-8 space-y-6 md:space-y-8">
           
           <!-- Wallet Card (Refined) -->
-          <div class="glass-strong p-8 relative overflow-hidden group rounded-[32px] border border-white/10 shadow-2xl">
+          <div class="glass-strong p-6 md:p-8 relative overflow-hidden group rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl">
             <!-- Dynamic Background -->
             <div class="absolute inset-0 bg-gradient-to-br from-bg-secondary/80 to-bg-primary/80 z-0"></div>
             <div class="absolute inset-0 bg-[url('/img/pattern.svg')] opacity-5 z-0"></div>
             <div class="absolute -right-20 -top-20 w-80 h-80 bg-gradient-end/30 rounded-full blur-[80px] group-hover:bg-gradient-end/40 transition-colors duration-700"></div>
             
-            <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+            <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-8">
               <div>
                 <div class="flex items-center gap-2 mb-2">
-                  <div class="text-sm text-white/60 font-medium uppercase tracking-wider">Solde Total</div>
+                  <div class="text-xs md:text-sm text-white/60 font-medium uppercase tracking-wider">Solde Total</div>
                   <div class="px-2 py-0.5 rounded-full bg-white/10 text-[10px] font-bold border border-white/5">LIVE</div>
                 </div>
-                <div class="text-5xl md:text-6xl font-black mb-4 tracking-tight flex items-baseline gap-2">
+                <div class="text-4xl md:text-6xl font-black mb-4 tracking-tight flex items-baseline gap-2">
                   {{ totalLCoins.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}
-                  <span class="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 font-bold">LC</span>
+                  <span class="text-xl md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 font-bold">LC</span>
                 </div>
                 <div class="flex items-center gap-4 text-sm">
                    <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400">
                      <span class="text-xs">▲</span> +12.5%
                    </div>
                    <span class="text-white/30 hidden md:inline">|</span>
-                   <div class="text-white/50">
+                   <div class="text-white/50 text-xs md:text-sm">
                      ≈ {{ formatCurrency(convertToCurrency(totalLCoins)) }}
                    </div>
                 </div>
               </div>
               
-              <div class="flex flex-row md:flex-col gap-3 w-full md:w-auto">
-                 <button @click="buyModalOpen = true" class="flex-1 md:flex-none btn bg-white text-bg-primary font-black px-6 py-3 rounded-xl hover:scale-105 transition-transform shadow-lg shadow-white/10 flex items-center justify-center gap-2">
+              <div class="grid grid-cols-2 md:flex md:flex-col gap-3 w-full md:w-auto">
+                 <button @click="buyModalOpen = true" class="btn bg-white text-bg-primary font-black px-4 md:px-6 py-3 rounded-xl hover:scale-105 transition-transform shadow-lg shadow-white/10 flex items-center justify-center gap-2">
                    <span>💎</span> Acheter
                  </button>
-                 <button @click="withdrawModalOpen = true" class="flex-1 md:flex-none btn btn-glass px-6 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-white/10">
+                 <button @click="withdrawModalOpen = true" class="btn btn-glass px-4 md:px-6 py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-white/10">
                    <span>🏦</span> Retirer
                  </button>
               </div>
@@ -153,7 +146,7 @@
           </div>
         </div>
       </div>
-    </main>
+  </div>
 
     <!-- Modals -->
     <DashboardBuyModal 
@@ -167,13 +160,13 @@
       @close="withdrawModalOpen = false" 
       @success="handleWithdrawSuccess"
     />
-
   </div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-  middleware: 'auth'
+  middleware: 'auth',
+  layout: 'dashboard'
 })
 
 const { user } = useAuth()

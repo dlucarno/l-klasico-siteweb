@@ -10,7 +10,7 @@ export default defineNuxtConfig({
       title: 'L-Klàsico - La Bataille du El Clásico',
       meta: [
         { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
         { name: 'description', content: 'Plongez dans la rivalité légendaire du El Clásico. Quiz en temps réel, duels épiques, battle royale et collection de stickers dans une application mobile immersive.' },
         { name: 'theme-color', content: '#181A2A' }
       ],
