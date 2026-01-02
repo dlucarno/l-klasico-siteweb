@@ -4,11 +4,11 @@
     <div class="container py-8 md:py-16 mb-20">
       <!-- Welcome Section -->
       <div class="mb-8 md:mb-12 flex flex-col md:flex-row justify-between items-end gap-6 animate-fade-in-up">
-        <div>
-          <h1 class="text-3xl md:text-4xl font-black mb-2">
-            Bonjour, <span class="text-transparent bg-clip-text bg-gradient-to-r from-gradient-end to-purple-400">{{ user?.email?.split('@')[0] || 'Fan' }}</span> 👋
+        <div class="w-full">
+          <h1 class="text-2xl md:text-4xl font-black mb-2 flex flex-wrap items-center gap-2">
+            Bonjour, <span class="text-transparent bg-clip-text bg-gradient-to-r from-gradient-end to-purple-400 break-all">{{ user?.email?.split('@')[0] || 'Fan' }}</span> 👋
           </h1>
-          <p class="text-white/50 text-sm md:text-base">Prêt à dominer le classement aujourd'hui ?</p>
+          <p class="text-white/50 text-xs md:text-base">Prêt à dominer le classement aujourd'hui ?</p>
         </div>
         
         <div class="flex gap-3 w-full md:w-auto">
@@ -39,9 +39,9 @@
                   <div class="text-xs md:text-sm text-white/60 font-medium uppercase tracking-wider">Solde Total</div>
                   <div class="px-2 py-0.5 rounded-full bg-white/10 text-[10px] font-bold border border-white/5">LIVE</div>
                 </div>
-                <div class="text-4xl md:text-6xl font-black mb-4 tracking-tight flex items-baseline gap-2">
-                  {{ totalLCoins.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}
-                  <span class="text-xl md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 font-bold">LC</span>
+                <div class="text-3xl md:text-6xl font-black mb-4 tracking-tight flex items-baseline gap-2 overflow-hidden">
+                  <span class="truncate">{{ totalLCoins.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}</span>
+                  <span class="text-lg md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50 font-bold shrink-0">LC</span>
                 </div>
                 <div class="flex items-center gap-4 text-sm">
                    <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400">
@@ -67,12 +67,12 @@
             <!-- Mini Stats Grid -->
             <div class="grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-white/5">
               <div class="relative pl-4 border-l-2 border-green-500/30">
-                <div class="text-white/40 text-xs mb-1">Gagnés (Retirables)</div>
-                <div class="text-xl font-bold text-green-400">{{ formatLCoins(user?.lCoins.earned || 0) }}</div>
+                <div class="text-white/40 text-[10px] md:text-xs mb-1">Gagnés (Retirables)</div>
+                <div class="text-base md:text-xl font-bold text-green-400 truncate">{{ formatLCoins(user?.lCoins.earned || 0) }}</div>
               </div>
-              <div class="relative pl-4 border-l-2 border-blue-500/30">
-                <div class="text-white/40 text-xs mb-1">Achetés (Jeu)</div>
-                <div class="text-xl font-bold text-blue-400">{{ formatLCoins(user?.lCoins.purchased || 0) }}</div>
+              <div class="relative pl-3 md:pl-4 border-l-2 border-blue-500/30 overflow-hidden">
+                <div class="text-white/40 text-[10px] md:text-xs mb-1">Achetés (Jeu)</div>
+                <div class="text-base md:text-xl font-bold text-blue-400 truncate">{{ formatLCoins(user?.lCoins.purchased || 0) }}</div>
               </div>
             </div>
           </div>

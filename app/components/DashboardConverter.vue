@@ -13,47 +13,47 @@
 
     <!-- Input Section (From L-Coins) -->
     <div class="space-y-4 relative">
-      <div class="bg-black/20 p-4 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-        <div class="flex justify-between text-xs text-white/50 mb-2">
+      <div class="bg-black/20 p-3 md:p-4 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
+        <div class="flex justify-between text-[10px] md:text-xs text-white/50 mb-2">
           <span>Vous donnez</span>
-          <span>Solde: {{ formatLCoins(cashoutableLCoins) }}</span>
+          <span class="truncate ml-2">Solde: {{ formatLCoins(cashoutableLCoins) }}</span>
         </div>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 md:gap-3">
           <input 
             v-model="amountLCoins"
             type="number" 
-            class="bg-transparent text-2xl font-bold w-full focus:outline-none text-white placeholder-white/20"
+            class="bg-transparent text-xl md:text-2xl font-bold w-full focus:outline-none text-white placeholder-white/20 min-w-0"
             placeholder="0"
           />
-          <div class="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg shrink-0">
-            <span class="w-5 h-5 rounded-full bg-gradient-end flex items-center justify-center text-[10px]">LC</span>
-            <span class="font-bold text-sm">L-COIN</span>
+          <div class="flex items-center gap-1 md:gap-2 bg-white/10 px-2 md:px-3 py-1.5 rounded-lg shrink-0">
+            <span class="w-4 h-4 md:w-5 md:h-5 rounded-full bg-gradient-end flex items-center justify-center text-[8px] md:text-[10px]">LC</span>
+            <span class="font-bold text-xs md:text-sm">L-COIN</span>
           </div>
         </div>
       </div>
 
       <!-- Swap Icon -->
       <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-        <div class="w-8 h-8 bg-bg-secondary border border-white/20 rounded-full flex items-center justify-center text-white/70 shadow-lg">
+        <div class="w-7 h-7 md:w-8 md:h-8 bg-bg-secondary border border-white/20 rounded-full flex items-center justify-center text-white/70 shadow-lg text-xs">
           ⬇
         </div>
       </div>
 
       <!-- Output Section (To Currency) -->
-      <div class="bg-black/20 p-4 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-        <div class="flex justify-between text-xs text-white/50 mb-2">
+      <div class="bg-black/20 p-3 md:p-4 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
+        <div class="flex justify-between text-[10px] md:text-xs text-white/50 mb-2">
           <span>Vous recevez (estimé)</span>
           <span>Devise</span>
         </div>
-        <div class="flex items-center gap-3">
-          <div class="text-2xl font-bold w-full text-gradient-end truncate">
+        <div class="flex items-center gap-2 md:gap-3">
+          <div class="text-xl md:text-2xl font-bold w-full text-gradient-end truncate min-w-0">
             {{ formatValue(convertedValue) }}
           </div>
           <div class="relative group">
-             <button class="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg shrink-0 hover:bg-white/20 transition-colors">
-              <span class="text-lg">{{ getCurrencyIcon(selectedCurrency) }}</span>
-              <span class="font-bold text-sm">{{ selectedCurrency }}</span>
-              <span class="text-[10px] ml-1">▼</span>
+             <button class="flex items-center gap-1.5 md:gap-2 bg-white/10 px-2 md:px-3 py-1.5 rounded-lg shrink-0 hover:bg-white/20 transition-colors">
+              <span class="text-base md:text-lg shrink-0">{{ getCurrencyIcon(selectedCurrency) }}</span>
+              <span class="font-bold text-xs md:text-sm">{{ selectedCurrency }}</span>
+              <span class="text-[8px] md:text-[10px] ml-1 shrink-0">▼</span>
             </button>
             
             <!-- Currency Dropdown -->
@@ -74,17 +74,17 @@
     </div>
 
     <!-- Rate Info -->
-    <div class="mt-6 flex justify-between items-center text-xs text-white/40">
+    <div class="mt-6 flex flex-wrap justify-between items-center gap-2 text-[10px] md:text-xs text-white/40">
       <span>1 L-Coin ≈ {{ formatRate(selectedCurrency) }}</span>
       <span>Frais réseau: <span class="text-green-400">0%</span></span>
     </div>
 
     <!-- Quick Buttons -->
-    <div class="grid grid-cols-4 gap-2 mt-4">
-      <button @click="setPercent(25)" class="py-1 rounded bg-white/5 hover:bg-white/10 text-xs transition-colors">25%</button>
-      <button @click="setPercent(50)" class="py-1 rounded bg-white/5 hover:bg-white/10 text-xs transition-colors">50%</button>
-      <button @click="setPercent(75)" class="py-1 rounded bg-white/5 hover:bg-white/10 text-xs transition-colors">75%</button>
-      <button @click="setPercent(100)" class="py-1 rounded bg-white/5 hover:bg-white/10 text-xs transition-colors">MAX</button>
+    <div class="grid grid-cols-4 gap-1.5 md:gap-2 mt-4">
+      <button @click="setPercent(25)" class="py-1 rounded bg-white/5 hover:bg-white/10 text-[10px] md:text-xs transition-colors">25%</button>
+      <button @click="setPercent(50)" class="py-1 rounded bg-white/5 hover:bg-white/10 text-[10px] md:text-xs transition-colors">50%</button>
+      <button @click="setPercent(75)" class="py-1 rounded bg-white/5 hover:bg-white/10 text-[10px] md:text-xs transition-colors">75%</button>
+      <button @click="setPercent(100)" class="py-1 rounded bg-white/5 hover:bg-white/10 text-[10px] md:text-xs transition-colors">MAX</button>
     </div>
   </div>
 </template>
