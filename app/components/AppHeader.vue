@@ -68,47 +68,42 @@
         'top-[70px]',
         'left-0',
         'right-0',
-        'bg-bg-primary/98',
-        'backdrop-blur-xl',
+        'bottom-0',
+        'bg-[#181A2A]', /* Hardcoded solid color to ensure opacity */
         'border-t',
-        'border-primary-blue/20',
+        'border-white/10',
         'transform',
         'transition-all',
         'duration-300',
-        'z-40',
-        'shadow-xl',
-        menuOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
+        'z-[100]',
+        'overflow-y-auto',
+        menuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
       ]"
     >
-      <ul class="flex flex-col p-8 space-y-4">
-        <li v-for="link in links" :key="link.href">
-          <a 
-            :href="link.href" 
-            @click="closeMenu" 
-            class="text-white no-underline font-semibold block py-3 px-4 rounded-lg hover:bg-gradient-end/20 hover:text-gradient-end transition-all duration-500 hover:translate-x-2"
-          >
-            {{ link.label }}
-          </a>
-        </li>
-        <li>
+      <div class="flex flex-col items-center justify-start pt-12 min-h-full p-8 space-y-8">
+        <ul class="flex flex-col items-center space-y-8 w-full">
+          <li v-for="link in links" :key="link.href" class="w-full text-center">
+            <a 
+              :href="link.href" 
+              @click="closeMenu" 
+              class="text-white text-3xl font-black block py-2 hover:text-primary-blue transition-colors duration-300"
+            >
+              {{ link.label }}
+            </a>
+          </li>
+        </ul>
+
+        <div class="w-full max-w-xs pt-12 border-t border-white/10">
           <NuxtLink 
             v-if="!isAuthenticated"
             to="/login" 
             @click="closeMenu"
-            class="btn btn-primary text-sm px-6 py-2 block text-center"
+            class="btn btn-primary w-full text-lg font-bold py-4 flex justify-center items-center shadow-lg shadow-real-gold/20 mb-4"
           >
             Se connecter
           </NuxtLink>
-          <NuxtLink 
-            v-else
-            to="/dashboard" 
-            @click="closeMenu"
-            class="btn btn-outline text-sm px-6 py-2 block text-center"
-          >
-            Dashboard
-          </NuxtLink>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </header>
 </template>
@@ -126,9 +121,16 @@ const links = [
 
 const toggleMenu = () => {
   menuOpen.value = !menuOpen.value
+  // Bloquer le scroll quand le menu est ouvert
+  if (process.client) {
+    document.body.style.overflow = menuOpen.value ? 'hidden' : ''
+  }
 }
 
 const closeMenu = () => {
   menuOpen.value = false
+  if (process.client) {
+    document.body.style.overflow = ''
+  }
 }
 </script>

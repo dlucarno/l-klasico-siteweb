@@ -10,20 +10,15 @@ export interface User {
 }
 
 export const useAuth = () => {
-  const user = useState<User | null>('user', () => {
-    if (process.client) {
-      const stored = localStorage.getItem('lklasico_user')
-      if (stored) {
-        try {
-          return JSON.parse(stored)
-        } catch (e) {
-          return null
-        }
-      }
-    }
-    return null
+  // Changement pour useCookie qui gère automatiquement la persistance (SSR + Client)
+  // et évite les problèmes d'hydratation liés à localStorage
+  const user = useCookie<User | null>('lklasico_user', {
+    default: () => null,
+    watch: true, // Surveille les changements pour mettre à jour le cookie
+    maxAge: 60 * 60 * 24 * 365 // 1 an
   })
-  const isAuthenticated = computed(() => user.value !== null)
+
+  const isAuthenticated = computed(() => !!user.value)
 
   const login = async (email: string, password: string): Promise<boolean> => {
     // TODO: Remplacer par un vrai appel API
@@ -39,11 +34,6 @@ export const useAuth = () => {
         },
         currency: 'EUR'
       }
-      
-      if (process.client) {
-        localStorage.setItem('lklasico_user', JSON.stringify(user.value))
-      }
-      
       return true
     }
     return false
@@ -51,23 +41,30 @@ export const useAuth = () => {
 
   const logout = () => {
     user.value = null
-    if (process.client) {
-      localStorage.removeItem('lklasico_user')
-    }
     navigateTo('/')
   }
 
+  // initAuth n'est plus nécessaire avec useCookie qui s'initialise tout seul
   const initAuth = () => {
-    if (process.client) {
-      const stored = localStorage.getItem('lklasico_user')
-      if (stored) {
-        try {
-          user.value = JSON.parse(stored)
-        } catch (e) {
-          console.error('Error parsing stored user', e)
-        }
-      }
+    // Gardé pour compatibilité si nécessaire, mais vide
+  }
+
+  const addCoins = (amount: number, type: 'earned' | 'purchased') => {
+    if (user.value) {
+      user.value.lCoins[type] += amount
+      // Force l'update du cookie pour les mutations profondes
+      user.value = { ...user.value }
     }
+  }
+
+  const withdrawCoins = (amount: number): boolean => {
+    if (user.value && user.value.lCoins.earned >= amount) {
+      user.value.lCoins.earned -= amount
+      // Force l'update du cookie
+      user.value = { ...user.value }
+      return true
+    }
+    return false
   }
 
   return {
@@ -75,7 +72,8 @@ export const useAuth = () => {
     isAuthenticated,
     login,
     logout,
-    initAuth
+    initAuth,
+    addCoins,
+    withdrawCoins
   }
 }
-
