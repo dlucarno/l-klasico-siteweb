@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-gradient-primary pb-20">
     <DashboardHeader />
     
-    <div class="container py-8">
+    <div class="container py-16 mb-20 relative z-10">
       <DashboardNav />
       
       <div class="card fade-in-up space-y-8">

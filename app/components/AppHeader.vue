@@ -21,7 +21,7 @@
           <NuxtLink 
             v-if="!isAuthenticated"
             to="/login" 
-            class="btn btn-primary text-sm px-6 py-2"
+            class="btn relative overflow-hidden bg-gradient-to-r from-real-gold to-yellow-500 text-bg-primary font-black text-sm px-6 py-2 hover:scale-105 transition-transform shadow-[0_0_20px_rgba(253,185,19,0.4)]"
           >
             Se connecter
           </NuxtLink>

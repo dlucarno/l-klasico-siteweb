@@ -128,13 +128,13 @@
           <p class="text-white/50 max-w-2xl mx-auto text-lg">Découvrez les fonctionnalités qui rendent chaque match unique.</p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div v-for="(feature, i) in features" :key="i" class="feature-card group text-center" :style="{ animationDelay: `${i * 100}ms` }">
-            <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-3xl mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 group-hover:bg-gradient-end group-hover:text-white">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto">
+          <div v-for="(feature, i) in features" :key="i" class="feature-card group flex flex-col items-center text-center p-8" :style="{ animationDelay: `${i * 100}ms` }">
+            <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:bg-gradient-end group-hover:text-white">
               {{ feature.icon }}
             </div>
             <h3 class="text-xl font-bold mb-3 group-hover:text-primary-blue transition-colors">{{ feature.title }}</h3>
-            <p class="text-white/50 leading-relaxed">{{ feature.description }}</p>
+            <p class="text-white/50 leading-relaxed max-w-xs mx-auto">{{ feature.description }}</p>
           </div>
         </div>
       </div>

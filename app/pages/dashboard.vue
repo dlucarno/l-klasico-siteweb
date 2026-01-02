@@ -8,7 +8,7 @@
 
     <DashboardHeader />
 
-    <main class="container py-12 relative z-10">
+    <main class="container py-16 mb-20 relative z-10">
       <!-- Welcome Section -->
       <div class="mb-12 flex flex-col md:flex-row justify-between items-end gap-6 animate-fade-in-up">
         <div>
@@ -42,7 +42,7 @@
               <div>
                 <div class="text-sm text-white/50 font-medium uppercase tracking-wider mb-1">Solde Total</div>
                 <div class="text-5xl font-black mb-2 flex items-baseline gap-2">
-                  {{ formatLCoins(totalLCoins) }}
+                  {{ totalLCoins.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}
                   <span class="text-xl text-gradient-end font-bold">L-Coins</span>
                 </div>
                 <div class="flex items-center gap-4 text-sm">

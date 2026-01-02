@@ -9,6 +9,10 @@ export default {
     './app/error.vue'
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+    },
     extend: {
       colors: {
         // Couleurs exactes du thème Flutter
